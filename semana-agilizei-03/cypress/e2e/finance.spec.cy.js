@@ -32,7 +32,7 @@ context('Dev finance agilizei', () => {
         cy.get('#data-table tbody tr').should('have.length', 1)
     });
 
-    it.only('Casdastrar entradas 2', () => {
+    it('Casdastrar entradas 2', () => {
         cy.get('#transaction .button').click()// id + classe
         cy.get('#description').type('Pagamento') // id
         cy.get('[name=amount]').type(50) //atributo
@@ -42,7 +42,7 @@ context('Dev finance agilizei', () => {
         cy.get('#data-table tbody tr').should('have.length', 1)
     });
 
-    it.only('Casdastrar entradas com data maior que a atual', () => {
+    it('Casdastrar entradas com data maior que a atual', () => {
         cy.get('#transaction .button').click()// id + classe
         cy.get('#description').type('Pagamento') // id
         cy.get('[name=amount]').type(50) //atributo
@@ -57,6 +57,16 @@ context('Dev finance agilizei', () => {
         cy.get('#description').type('Mesada') // id
         cy.get('[name=amount]').type(-12) //atributo
         cy.get('[name=date]').type('2024-03-17') // atributo
+        cy.get('button').contains('Salvar').click() // tipo e valor
+
+        cy.get('#data-table tbody tr').should('have.length', 1)
+    });
+
+    it.only('Casdastrar saídas com data maior que a data atual', () => {
+        cy.get('#transaction .button').click()// id + classe
+        cy.get('#description').type('Mesada') // id
+        cy.get('[name=amount]').type(-18) //atributo
+        cy.get('[name=date]').type('2024-10-25') // atributo
         cy.get('button').contains('Salvar').click() // tipo e valor
 
         cy.get('#data-table tbody tr').should('have.length', 1)
