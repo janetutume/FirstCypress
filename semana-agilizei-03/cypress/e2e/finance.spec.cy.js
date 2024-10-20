@@ -77,7 +77,42 @@ context('Dev finance agilizei', () => {
             .click()
     });
 
-    it.only('Validar saldo com diversas transações', () => {
+    it.only('Remover entradas e saídas 2', () => {
+
+        const entrada = 'Mesada'
+        const saida = 'kinderOvo'
+
+        cy.get('#transaction .button').click()// id + classe
+        cy.get('#description').type(entrada) // id
+        cy.get('[name=amount]').type(200) //atributo
+        cy.get('[name=date]').type('2024-03-17') // atributo
+        cy.get('button').contains('Salvar').click() // tipo e valor
+
+        cy.get('#transaction .button').click()// id + classe
+        cy.get('#description').type(saida) // id
+        cy.get('[name=amount]').type(-120) //atributo
+        cy.get('[name=date]').type('2024-03-17') // atributo
+        cy.get('button').contains('Salvar').click() // tipo e valor
+
+        // estratégia 1 : voltar para o elemento pai, e avançar para um td img attr
+
+        cy.get('td.description')
+            .contains(entrada)
+            .parent()
+            .find('img[onclick*=remove]')
+            .click()
+
+
+        // estratégia 2 : buscar todos os irmãos , e buscar o que tem img + attr
+
+        cy.get('td.description')
+            .contains(saida)
+            .siblings()
+            .children('img[onclick*=remove]')
+            .click()
+    });
+
+    it('Validar saldo com diversas transações', () => {
         const entrada = 'Mesada'
         const saida = 'kinderOvo'
 
