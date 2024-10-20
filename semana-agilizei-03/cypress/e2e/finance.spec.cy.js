@@ -32,6 +32,16 @@ context('Dev finance agilizei', () => {
         cy.get('#data-table tbody tr').should('have.length', 1)
     });
 
+    it.only('Casdastrar entradas 2', () => {
+        cy.get('#transaction .button').click()// id + classe
+        cy.get('#description').type('Pagamento') // id
+        cy.get('[name=amount]').type(50) //atributo
+        cy.get('[name=date]').type('2024-03-20') // atributo
+        cy.get('button').contains('Salvar').click() // tipo e valor
+
+        cy.get('#data-table tbody tr').should('have.length', 1)
+    });
+
     it('Casdastrar saídas', () => {
         cy.get('#transaction .button').click()// id + classe
         cy.get('#description').type('Mesada') // id
@@ -77,7 +87,7 @@ context('Dev finance agilizei', () => {
             .click()
     });
 
-    it.only('Remover entradas e saídas 2', () => {
+    it('Remover entradas e saídas 2', () => {
 
         const entrada = 'Mesada'
         const saida = 'kinderOvo'
