@@ -42,6 +42,16 @@ context('Dev finance agilizei', () => {
         cy.get('#data-table tbody tr').should('have.length', 1)
     });
 
+    it.only('Casdastrar entradas com data maior que a atual', () => {
+        cy.get('#transaction .button').click()// id + classe
+        cy.get('#description').type('Pagamento') // id
+        cy.get('[name=amount]').type(50) //atributo
+        cy.get('[name=date]').type('2024-10-22') // atributo
+        cy.get('button').contains('Salvar').click() // tipo e valor
+
+        cy.get('#data-table tbody tr').should('have.length', 1)
+    });
+
     it('Casdastrar saídas', () => {
         cy.get('#transaction .button').click()// id + classe
         cy.get('#description').type('Mesada') // id
